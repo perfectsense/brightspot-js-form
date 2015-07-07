@@ -1,0 +1,17 @@
+{
+  "name": "brightspot-js-forms",
+  "version": "0.0.0",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "jquery": "~2.1.4",
+    "bsp-utils": "perfectsense/brightspot-js-utils#~3.0.0",
+    "systemjs": "git@github.com:systemjs/systemjs.git#0.18.4"
+  }
+}

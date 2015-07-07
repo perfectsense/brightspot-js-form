@@ -1,0 +1,11 @@
+label {
+	display: block;
+	padding: 10px 0;
+}
+input.dirty.invalid {
+	border: 1px red solid;
+	outline: none;
+}
+.bsp-form-loading {
+	display: none;
+}

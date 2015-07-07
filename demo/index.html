@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="demo.css" />
+	</head>
+	<body>
+
+	<h1>bsp-forms</h1>
+
+	<form method="get" class="bsp-form-loading" data-bsp-form>
+
+		<div id="messages"></div>
+
+		<p>Required element, messages concatenated</p>
+
+		<label>Email <input type="email" name="email1" id="email1" title="Please enter an email address" required /></label>
+		<div data-bsp-form-message data-bsp-form-message-options='{
+			"concat": true,
+			"fieldSelector": "#email1",
+			"messages": {
+				"valueMissing": "The email field must be filled in"
+			}
+		}'></div>
+
+		<p>Required element, messages not concatenated (only shows first invalid message)</p>
+
+		<label>URL <input type="url" name="url1" id="url1" title="Please enter a valid URL" required /></label>
+		<div data-bsp-form-message data-bsp-form-message-options='{
+			"fieldSelector": "#url1",
+			"messages": {
+				"valueMissing": "You must fill in a valid URL"
+			}
+		}'></div>
+
+		<input type="submit" value="Submit" formnovalidate />	
+	</form>
+
+
+	<script src="/assets/bower/systemjs/dist/system.js"></script>
+	<script>
+		System.config({
+		  defaultJSExtensions: true,
+		  map: {
+		  	'babel': '/assets/node/babel-core/browser.js',
+		  	'bsp-form': '/assets/js/bsp-form.js',
+		  	'bsp-form-message': '/assets/js/bsp-form-message.js',
+		  	'bsp-utils': '/assets/bower/bsp-utils/bsp-utils.js',
+		  	'jquery': '/assets/bower/jquery/dist/jquery.js'
+		  },
+		  transpiler: 'babel'
+		});
+
+		System.import('/assets/js/bsp-form-plugin');
+		System.import('/assets/js/bsp-form-message-plugin');
+	</script>
+
+	</body>
+</html>
