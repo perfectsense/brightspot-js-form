@@ -5,39 +5,27 @@
 	</head>
 	<body>
 
-	<h1>bsp-forms</h1>
+		<h1>bsp-forms</h1>
 
-	<form method="get" class="bsp-form-loading" data-bsp-form>
-		<label>Email <input type="email" name="email1" id="email1" title="Please enter a valid email address" required /></label>
-		<div data-bsp-form-message="#email1"></div>
+		<form method="get" class="bsp-form-loading" data-bsp-form>
+			<label>Email <input type="email" name="email1" id="email1" title="Please enter a valid email address" required /></label>
+			<div data-bsp-form-message="#email1"></div>
 
-		<label>URL <input type="url" name="url1" id="url1" title="Please enter a valid URL" required /></label>
-		<div data-bsp-form-message="#url1"></div>
+			<label>URL <input type="url" name="url1" id="url1" title="Please enter a valid URL" required /></label>
+			<div data-bsp-form-message="#url1"></div>
 
-		<div class="bsp-form-buttons">
-			<input type="submit" value="Submit" />	
-			<input type="reset" value="Reset" formnovalidate />
-		</div>
-	</form>
+			<div class="bsp-form-buttons">
+				<input type="submit" value="Submit" />	
+				<input type="reset" value="Reset" formnovalidate />
+			</div>
+		</form>
 
-
-	<script src="/assets/bower/systemjs/dist/system.js"></script>
-	<script>
-		System.config({
-		  defaultJSExtensions: true,
-		  map: {
-		  	'babel': '/assets/node/babel-core/browser.js',
-		  	'bsp-form': '/assets/js/bsp-form.js',
-		  	'bsp-form-message': '/assets/js/bsp-form-message.js',
-		  	'bsp-utils': '/assets/bower/bsp-utils/bsp-utils.js',
-		  	'jquery': '/assets/bower/jquery/dist/jquery.js'
-		  },
-		  transpiler: 'babel'
-		});
-
-		System.import('/assets/js/bsp-form-plugin');
-		System.import('/assets/js/bsp-form-message-plugin');
-	</script>
+		<script src="/assets/bower/systemjs/dist/system.js"></script>
+		<script src="config.js"></script>
+		<script>
+			System.import('/assets/js/bsp-form-plugin');
+			System.import('/assets/js/bsp-form-message-plugin');
+		</script>
 
 	</body>
 </html>
