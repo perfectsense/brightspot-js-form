@@ -8,7 +8,7 @@ Provides utlities and plugins to build an alternate, highly flexible user interf
 *	Replaces the native validation user interface, but still uses native [HTML5 constraint validation](http://www.html5rocks.com/en/tutorials/forms/constraintvalidation/) to validate fields
 *	Can revert to native UI if needed
 *	Adds some helper classes on the form and input elements to aid styling
-*	Allows outputting field messages anywhere inside the form element
+*	Allows outputting field messages anywhere on the page
 *	Attempts to remedy some browser inconsistences
 *	Can use native browser validation messages or custom messages
 *	Hooks for custom validation in non-native and native modes
