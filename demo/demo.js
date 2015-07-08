@@ -17,6 +17,16 @@ export default {
 		this.$el.on('reset', () => {
 			self.resetPasswordFieldsCustomValidity();
 		});
+		this.$el.find('#pw1').on('input', () => {
+			var $pw2 = this.$el.find('#pw2');
+			if ($pw2.hasClass('dirty')) {
+				$pw2.trigger('input');
+				self.passwordFieldsValid();
+			}
+		});
+		this.$el.find('#pw2').on('input', () => {
+			self.passwordFieldsValid();
+		});
 		super.addEvents();
 	},
 	passwordFieldsValid() {
