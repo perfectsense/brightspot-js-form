@@ -8,7 +8,26 @@ export default {
 		eventNameInput: 'bsp-field-input',
 		eventNameSubmit: 'bsp-form-submit',
 		eventNameReset: 'bsp-form-reset',
-		useNativeUi: false
+		/**
+		 * @todo write better default messages,
+		 * possibly different defaults for different fields types,
+		 * possibly allow field name, id, and value tokens
+		 */
+		messages: {
+			badInput: 'Bad input error',
+			patternMismatch: 'Pattern mismatch error',
+			rangeOverflow: 'Range overflow error',
+			rangeUnderflow: 'Range underflow error',
+			stepMismatch: 'Step mistmatch error',
+			tooLong: 'Too long error',
+			tooShort: 'Too short error',
+			typeMismatch: 'Type mismatch error',
+			valueMissing: 'Value missing error'
+		},
+		/** @todo allow messages to be populated from a URL */
+		/** messagesUrl: '', */
+		useNativeUi: false,
+		useNativeMessages: false
 	},
 	init($el, options) {
 		var fieldSelector = $el.data('bsp-form-message');
@@ -59,9 +78,29 @@ export default {
 	},
 	populateMessage() {
 		if (!this.options.useNativeUi) {
-			this.$el.html(this.field.validationMessage);
+			if (this.options.useNativeMessages) {
+				this.$el.html(this.field.validationMessage);
+			} else {
+				this.populateNonNativeMessage();
+			}
 			this.$el.addClass('error');
 		}
+	},
+	populateNonNativeMessage() {
+		var firstErrorFound = false;
+		var message = '';
+		var self = this;
+		$.each(this.field.validity, (key, value) => {
+			if (key !== 'valid' && !firstErrorFound && value) {
+				firstErrorFound = true;
+				if (key === 'customError') {
+					message = self.field.validationMessage;
+				} else {
+					message = self.options.messages[key];
+				}
+			}
+		});
+		this.$el.html(message);
 	},
 	resetField() {
 		this.$el.removeClass('error').empty();
