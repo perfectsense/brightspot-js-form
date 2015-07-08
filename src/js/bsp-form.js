@@ -2,6 +2,7 @@ export default {
 	defaults: {
 		_allFieldsClean: true,
 		eventNameFieldInvalid: 'bsp-field-invalid',
+		eventNameInput: 'bsp-field-input',
 		eventNameReset: 'bsp-form-reset',
 		eventNameSubmit: 'bsp-form-submit',
 		loadingClass: 'bsp-form-loading',
@@ -58,6 +59,7 @@ export default {
 		this.$el.on('input', 'input, select', (e) => {
 			self.makeFormDirty();
 			self.makeFieldDirty(e.target);
+			$(e.target).trigger(self.options.eventNameInput, self);
 		});
 	},
 	addResetEvents() {
@@ -110,18 +112,18 @@ export default {
 	},
 	triggerInvalidFieldEvent(field) {
 		if (typeof field !== 'undefined') {
-			$(field).trigger(this.options.eventNameFieldInvalid);
+			$(field).trigger(this.options.eventNameFieldInvalid, this);
 		}
 	},
 	triggerFormSubmitEvent() {
-		this.$el.find('input, select').trigger(this.options.eventNameSubmit);
+		this.$el.find('input, select').trigger(this.options.eventNameSubmit, this);
 	},
 	resetForm() {
 		this.$el.removeClass('dirty submitted').addClass('clean');
 		this.$el.find('input, select')
 			.removeClass('dirty')
 			.addClass('clean')
-			.trigger(this.options.eventNameReset);
+			.trigger(this.options.eventNameReset, this);
 		this._allFieldsClean = true;
 	}
 };
