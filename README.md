@@ -1,14 +1,23 @@
 bsp-form
 ========
 
-More to follow, but basics are:
+Introduction
+------------
 
-*	Uses native [HTML5 constraint validation](http://www.html5rocks.com/en/tutorials/forms/constraintvalidation/) on fields
-*	Adds classes to inputs and form element to aid in styling:
-	*	**clean/dirty** - When the form is clean, no fields have been editied. If a single field has been edited, the field and the form lose the clean/valid classes and gain the dirty/invalid classes. Combine with native :valid and :invalid pseudo selectors to conditionally display formatting/messages.
-	*	**submitted** - Added after submitting the form, removed if the form is reset
-*	Since the UI for form validation is wildly inconsistent across different browsers, it is bypassed by default and messages can be written to any element using the bsp-form-message plugin. Example: `<div bsp-form-message="#myfield"></div>`. When the form is submitted, the native validation message (`$('#myfield')[0].validationMessage`) for a field with the ID myfield will be taken be displayed in the element.
-*	It is possible to use the native UI by setting the validateNative option to true.
+Provides utlities and plugins to build an alternate, highly flexible user interface for HTML forms inside [Brightspot CMS](https://github.com/perfectsense/brightspot-cms).
+*	Replaces the native validation user interface, but still uses native [HTML5 constraint validation](http://www.html5rocks.com/en/tutorials/forms/constraintvalidation/) to validate fields
+*	Can revert to native UI if needed
+*	Adds some helper classes on the form and input elements to aid styling
+*	Allows outputting field messages anywhere inside the form element
+*	Attempts to remedy some browser inconsistences
+*	Can use native browser validation messages or custom messages
+*	Hooks for custom validation in non-native and native modes
+
+Custom Classes
+--------------
+These classes can be combined with native [:valid](https://developer.mozilla.org/en-US/docs/Web/CSS/%3Avalid), [:invalid](https://developer.mozilla.org/en-US/docs/Web/CSS/%3Ainvalid), and [:required](https://developer.mozilla.org/en-US/docs/Web/CSS/%3Arequired) pseudo selectors to conditionally display formatting/messages.
+*	**clean/dirty** - When the form is clean, no fields have been edited. If a single field has been edited, the field and the form lose the clean class and gain the dirty class. Other fields will keep the clean class until a user edits them.
+*	**submitted** - Added to the form element after submitting the form, removed if the form is reset.
 
 Demo
 ----
@@ -16,3 +25,5 @@ Demo
 You have to run through http, so an express server is provided. 
 
 Run `node demo/server.js` from the project root.
+
+Visit http://localhost:3000 in a browser.
