@@ -7,12 +7,18 @@
 
 		<h1>bsp-forms</h1>
 
-		<form method="get" class="bsp-form-loading" data-bsp-form>
+		<form method="get" class="bsp-form-loading" data-bsp-form-demo>
 			<label>Email <input type="email" name="email1" id="email1" title="Please enter a valid email address" required /></label>
 			<div data-bsp-form-message="#email1"></div>
 
 			<label>URL <input type="url" name="url1" id="url1" title="Please enter a valid URL" required /></label>
 			<div data-bsp-form-message="#url1"></div>
+
+			<label>Password <input type="password" name="pw1" id="pw1" title="Please enter a password" required /></label>
+			<div data-bsp-form-message="#pw1"></div>
+			
+			<label>Repeat Password <input type="password" name="pw2" id="pw2" title="" required /></label>
+			<div data-bsp-form-message="#pw2"></div>
 
 			<div class="bsp-form-buttons">
 				<input type="submit" value="Submit" />	
@@ -23,8 +29,8 @@
 		<script src="/assets/bower/systemjs/dist/system.js"></script>
 		<script src="config.js"></script>
 		<script>
-			System.import('/assets/js/bsp-form-plugin');
 			System.import('/assets/js/bsp-form-message-plugin');
+			System.import('demo-plugin');
 		</script>
 
 	</body>

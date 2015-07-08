@@ -3,8 +3,8 @@ import bsp_form from 'bsp-form';
 
 export default {
 	defaults: {
-		defaultMessage: 'There was an error with this field',
 		eventNameInvalidField: 'bsp-field-invalid',
+		eventNameSubmit: 'bsp-form-submit',
 		eventNameReset: 'bsp-form-reset'
 	},
 	init($el, options) {
@@ -12,6 +12,7 @@ export default {
 		this.$el = $el;
 		this.options = $.extend(true, {}, options, this.defaults);
 		this.$field = $(fieldSelector);
+		this.field = this.$field[0];
 		if (!this.$field.length || !bsp_form.hasConstraintApi()) {
 			return;
 		}
@@ -29,19 +30,12 @@ export default {
 		this.$field.on(this.options.eventNameReset, () => {
 			self.resetField();
 		});
+		this.$field.on(this.options.eventNameSubmit, () => {
+			self.resetField();
+		});
 	},
 	populateMessage() {
-		var title = this.$field.attr('title');
-		if (title) {
-			this.$el.html(title);
-		} else {
-			/**
-			  * @todo this can be much improved, sending
-			  * default messages for every invalid state
-			  * or allowing custom messages
-			  */
-			this.$el.html(self.options.defaultMessage);
-		}
+		this.$el.html(this.field.validationMessage);
 		this.$el.addClass('error');
 	},
 	resetField() {

@@ -2,7 +2,14 @@ label {
 	display: block;
 	padding: 10px 0;
 }
-input.dirty.invalid {
+form {
+	padding: 11px;
+}
+form.dirty:invalid {
+	border: 1px red solid;
+	padding: 10px;
+}
+input.dirty:invalid {
 	border: 1px red solid;
 	outline: none;
 }
