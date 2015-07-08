@@ -9,7 +9,7 @@ export default {
 	__proto__: bsp_form, // jshint ignore:line
 	
 	init($el, options) {
-		options.validateNative = false; // for dev convenience to toggle between native and non-native
+		options.validateNative = true; // for dev convenience to toggle between native and non-native
 		super.init($el, options);
 	},
 	addEvents() {

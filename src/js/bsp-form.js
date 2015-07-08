@@ -30,27 +30,40 @@ export default {
 		this.$el.removeClass(this.options.loadingClass);
 		this.resetForm();
 	},
+	addSubmitClass() {
+		this.$el.addClass('submitted');
+	},
 	addEvents() {
 		var self = this;
 		this.$el.on('submit', (e) => {
-			self.$el.addClass('submitted');
+			self.addSubmitClass();
 			self.triggerFormSubmitEvent();
 			if (!self.validate()) {
 				e.preventDefault();
 			}
 		});
-		this.$el.on('input', 'input, select', (e) => {
-			self.makeFormDirty();
-			self.makeFieldDirty(e.target);
-		});
-		this.$el.on('reset', () => {
-			self.resetForm();
-		});
+		this.addInputEvents();
+		this.addResetEvents();
 	},
 	addEventsNative() {
 		var self = this;
 		this.$el.on('input submit', () => {
 			self.validateNative();
+		});
+		this.addInputEvents();
+		this.addResetEvents();
+	},
+	addInputEvents() {
+		var self = this;
+		this.$el.on('input', 'input, select', (e) => {
+			self.makeFormDirty();
+			self.makeFieldDirty(e.target);
+		});
+	},
+	addResetEvents() {
+		var self = this;
+		this.$el.on('reset', () => {
+			self.resetForm();
 		});
 	},
 	setNoValidate() {
