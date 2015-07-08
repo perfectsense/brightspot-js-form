@@ -3,6 +3,7 @@ import bsp_form from 'bsp-form';
 
 export default {
 	defaults: {
+		checkOnInput: true,
 		eventNameInvalidField: 'bsp-field-invalid',
 		eventNameSubmit: 'bsp-form-submit',
 		eventNameReset: 'bsp-form-reset'
@@ -24,6 +25,15 @@ export default {
 	},
 	addEvents() {
 		var self = this;
+		if (this.options.checkOnInput) {
+			this.$field.on('input', () => {
+				if (bsp_form.fieldIsValid(this.field)) {
+					self.resetField();
+				} else {
+					self.populateMessage();
+				}
+			});
+		}
 		this.$field.on(this.options.eventNameInvalidField, () => {
 			self.populateMessage();
 		});
