@@ -6,6 +6,14 @@ input.dirty.invalid {
 	border: 1px red solid;
 	outline: none;
 }
+.bsp-form-buttons {
+	margin-top: 10px;
+}
+.bsp-form-message.error {
+	border: 1px red solid;
+	display: inline-block;
+	padding: 10px;
+}
 .bsp-form-loading {
 	display: none;
 }

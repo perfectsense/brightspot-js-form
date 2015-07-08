@@ -1,7 +1,8 @@
 export default {
 	defaults: {
 		_allFieldsClean: true,
-		fieldInvalidEventName: 'bsp-field-invalid',
+		eventNameFieldInvalid: 'bsp-field-invalid',
+		eventNameReset: 'bsp-form-reset',
 		loadingClass: 'bsp-form-loading',
 		validateNative: false
 	},
@@ -25,7 +26,8 @@ export default {
 		return typeof dummy.validity === 'object';
 	},
 	addFormLoadClasses() {
-		this.$el.removeClass(this.options.loadingClass).addClass('clean valid');
+		this.$el.removeClass(this.options.loadingClass);
+		this.resetForm();
 	},
 	addEvents() {
 		var self = this;
@@ -41,9 +43,12 @@ export default {
 			self.makeFieldDirty(e.target);
 			self.setFieldValidClasses(e.target);
 		});
+		this.$el.on('reset', () => {
+			self.resetForm();
+		});
 	},
 	addEventsNative() {
-		var self;
+		var self = this;
 		this.$el.on('input submit', () => {
 			self.validateNative();
 		});
@@ -96,7 +101,14 @@ export default {
 	},
 	triggerInvalidFieldEvent(field) {
 		if (typeof field !== 'undefined') {
-			$(field).trigger(this.options.fieldInvalidEventName);
+			$(field).trigger(this.options.eventNameFieldInvalid);
 		}
+	},
+	resetForm() {
+		this.$el.removeClass('dirty invalid submitted').addClass('clean valid');
+		this.$el.find('input, select')
+			.removeClass('dirty invalid')
+			.addClass('clean valid')
+			.trigger(this.options.eventNameReset);
 	}
 };

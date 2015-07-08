@@ -8,31 +8,16 @@
 	<h1>bsp-forms</h1>
 
 	<form method="get" class="bsp-form-loading" data-bsp-form>
-
-		<div id="messages"></div>
-
-		<p>Required element, messages concatenated</p>
-
-		<label>Email <input type="email" name="email1" id="email1" title="Please enter an email address" required /></label>
-		<div data-bsp-form-message data-bsp-form-message-options='{
-			"concat": true,
-			"fieldSelector": "#email1",
-			"messages": {
-				"valueMissing": "The email field must be filled in"
-			}
-		}'></div>
-
-		<p>Required element, messages not concatenated (only shows first invalid message)</p>
+		<label>Email <input type="email" name="email1" id="email1" title="Please enter a valid email address" required /></label>
+		<div data-bsp-form-message="#email1"></div>
 
 		<label>URL <input type="url" name="url1" id="url1" title="Please enter a valid URL" required /></label>
-		<div data-bsp-form-message data-bsp-form-message-options='{
-			"fieldSelector": "#url1",
-			"messages": {
-				"valueMissing": "You must fill in a valid URL"
-			}
-		}'></div>
+		<div data-bsp-form-message="#url1"></div>
 
-		<input type="submit" value="Submit" formnovalidate />	
+		<div class="bsp-form-buttons">
+			<input type="submit" value="Submit" />	
+			<input type="reset" value="Reset" formnovalidate />
+		</div>
 	</form>
 
 
