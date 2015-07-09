@@ -16,8 +16,10 @@ export default {
 	},
 	addEvents() {
 		var self = this;
-		this.$match.on(bsp_form.events.eventNameInput, () => {
-			self.validate();
+		this.$match.on(bsp_form.events.eventNameInput, (e, form) => {
+			if (self.$field.hasClass(form.options.classDirty)) {
+				self.validate();
+			}
 		});
 		super.addEvents();
 	},
