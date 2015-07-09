@@ -102,12 +102,14 @@ export default {
 		this.$el.html(message);
 	},
 	interpolateFieldValues(str) {
+		var name = this.$field.attr('name');
 		var pattern = this.$field.attr('pattern');
 		var title = this.$field.attr('title');
 		var titleLowerCase = title.toLowerCase();
 		var titleUpperCase = title.toUpperCase();
 		var type = this.$field.attr('type');
 		var value = this.$field.val();
+		str = str.replace(/\{name\}/, name);
 		str = str.replace(/\{pattern\}/, pattern);
 		str = str.replace(/\{title\}/, title);
 		str = str.replace(/\{titleLowerCase\}/, titleLowerCase);
