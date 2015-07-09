@@ -21,13 +21,9 @@ export default {
 		}
 		this.$el = $el;
 		this.options = $.extend(true, {}, this.defaults, options);
-		if (this.options.validateNative) {
-			this.addEventsNative();
-		} else {
-			this.setNoValidate();
-			this.addEvents();
-			$el.data('bsp-form-instance', this);
-		}
+		this.setNoValidate();
+		this.addEvents();
+		$el.data('bsp-form-instance', this);
 		this.addFormLoadClasses();
 	},
 	hasConstraintApi() {
@@ -42,22 +38,7 @@ export default {
 		this.$el.addClass(this.options.classSubmitted);
 	},
 	addEvents() {
-		var self = this;
-		this.$el.on('submit', (e) => {
-			self.addSubmitClass();
-			self.triggerFormSubmitEvent();
-			if (!self.validate()) {
-				e.preventDefault();
-			}
-		});
-		this.addInputEvents();
-		this.addResetEvents();
-	},
-	addEventsNative() {
-		var self = this;
-		this.$el.on('input submit', () => {
-			self.validateNative();
-		});
+		this.addSubmitEvents();
 		this.addInputEvents();
 		this.addResetEvents();
 	},
@@ -75,8 +56,20 @@ export default {
 			self.resetForm();
 		});
 	},
+	addSubmitEvents() {
+		var self = this;
+		this.$el.on('submit', (e) => {
+			self.addSubmitClass();
+			self.triggerFormSubmitEvent();
+			if (!self.validate()) {
+				e.preventDefault();
+			}
+		});
+	},
 	setNoValidate() {
-		this.$el.attr('novalidate', '');
+		if (!this.options.validateNative) {
+			this.$el.attr('novalidate', '');
+		}
 	},
 	validate() {
 		var isValid = true;
@@ -88,14 +81,6 @@ export default {
 			}
 		});
 		return isValid;
-	},
-	/**
-	 * To do any custom validation for native forms, override this
-	 * function and use setCustomValidity to set an error
-	 * See demo/demo-plugin.js for an example
-	 */
-	validateNative() {
-
 	},
 	fieldIsValid(field) {
 		if (typeof field !== 'undefined') {
@@ -123,7 +108,7 @@ export default {
 		}
 	},
 	triggerFormSubmitEvent() {
-		this.$el.find(this.options.selectorAllFields).trigger(this.events.eventNameInput, this);
+		this.$el.find(this.options.selectorAllFields).trigger(this.events.eventNameSubmit, this);
 	},
 	resetForm() {
 		this.$el
