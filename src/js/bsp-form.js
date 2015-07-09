@@ -5,6 +5,7 @@ export default {
 		classDirty: 'dirty',
 		classSubmitted: 'submitted',
 		loadingClass: 'bsp-form-loading',
+		selectorAllFields: 'input, select, textarea',
 		validateNative: false
 	},
 	events: {
@@ -62,7 +63,7 @@ export default {
 	},
 	addInputEvents() {
 		var self = this;
-		this.$el.on('input', 'input, select', (e) => {
+		this.$el.on('input', this.options.selectorAllFields, (e) => {
 			self.makeFormDirty();
 			self.makeFieldDirty(e.target);
 			$(e.target).trigger(self.events.eventNameInput, self);
@@ -80,7 +81,7 @@ export default {
 	validate() {
 		var isValid = true;
 		var self = this;
-		this.$el.find('input, select').each((i, field) => {
+		this.$el.find(this.options.selectorAllFields).each((i, field) => {
 			if (!self.fieldIsValid(field)) {
 				self.triggerInvalidFieldEvent(field);
 				isValid = false;
@@ -122,13 +123,13 @@ export default {
 		}
 	},
 	triggerFormSubmitEvent() {
-		this.$el.find('input, select').trigger(this.events.eventNameInput, this);
+		this.$el.find(this.options.selectorAllFields).trigger(this.events.eventNameInput, this);
 	},
 	resetForm() {
 		this.$el
 			.removeClass([this.options.classDirty,this.options.classSubmitted].join(' '))
 			.addClass(this.options.classClean);
-		this.$el.find('input, select')
+		this.$el.find(this.options.selectorAllFields)
 			.removeClass(this.options.classDirty)
 			.addClass(this.options.classClean)
 			.trigger(this.events.eventNameReset, this);
