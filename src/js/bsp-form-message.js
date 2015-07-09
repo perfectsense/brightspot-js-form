@@ -48,19 +48,15 @@ export default {
 			});
 		}
 		this.$field.on(bsp_form.events.eventNameFieldInvalid, (e, form) => {
-			this.setIsNativeUi(form);
 			self.populateMessage();
 		});
 		this.$field.on(bsp_form.events.eventNameFieldValid, (e, form) => {
-			this.setIsNativeUi(form);
 			self.resetField();
 		});
 		this.$field.on(bsp_form.events.eventNameReset, (e, form) => {
-			this.setIsNativeUi(form);
 			self.resetField();
 		});
 		this.$field.on(bsp_form.events.eventNameSubmit, (e, form) => {
-			this.setIsNativeUi(form);
 			self.resetField();
 		});
 	},
