@@ -8,16 +8,17 @@
 		<h1>bsp-forms</h1>
 
 		<form method="get" class="bsp-form-loading" data-bsp-form-demo>
-			<label>Email <input type="email" name="email1" id="email1" title="Please enter a valid email address" required /></label>
+			<label>Email <input type="email" name="email1" id="email1" title="Email address" required /></label>
 			<div data-bsp-form-message="#email1"></div>
+			<div data-bsp-form-message="#email1" data-bsp-form-message-options='{ "messagesUrl": "/demo-messages-data.json" }'></div>
 
-			<label>URL <input type="url" name="url1" id="url1" title="Please enter a valid URL" required /></label>
+			<label>URL <input type="url" name="url1" id="url1" title="URL" required /></label>
 			<div data-bsp-form-message="#url1"></div>
 
-			<label>Password <input type="password" name="pw1" id="pw1" title="Please enter a password" required /></label>
+			<label>Password <input type="password" name="pw1" id="pw1" title="Password" required /></label>
 			<div data-bsp-form-message="#pw1"></div>
 			
-			<label>Repeat Password <input type="password" name="pw2" id="pw2" title="" required /></label>
+			<label>Repeat Password <input type="password" name="pw2" id="pw2" title="Password (repeated)" required /></label>
 			<div data-bsp-form-message="#pw2"></div>
 
 			<div class="bsp-form-buttons">

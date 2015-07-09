@@ -1,0 +1,11 @@
+{
+	"badInput": "Server message: Bad input error",
+	"patternMismatch": "Server message: Pattern mismatch error",
+	"rangeOverflow": "Server message: Range overflow error",
+	"rangeUnderflow": "Server message: Range underflow error",
+	"stepMismatch": "Server message: Step mistmatch error",
+	"tooLong": "Server message: Too long error",
+	"tooShort": "Server message: Too short error",
+	"typeMismatch": "Server message: Type mismatch error",
+	"valueMissing": "Server message: Value missing error"
+}

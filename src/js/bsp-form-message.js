@@ -24,8 +24,7 @@ export default {
 			typeMismatch: 'Type mismatch error',
 			valueMissing: 'Value missing error'
 		},
-		/** @todo allow messages to be populated from a URL */
-		/** messagesUrl: '', */
+		messagesUrl: undefined,
 		useNativeUi: false,
 		useNativeMessages: false
 	},
@@ -40,6 +39,7 @@ export default {
 		}
 		this.addEvents();
 		this.addClasses();
+		this.fetchServerMessages();
 	},
 	addClasses() {
 		this.$el.addClass('bsp-form-message');
@@ -68,6 +68,14 @@ export default {
 			this.setIsNativeUi(form);
 			self.resetField();
 		});
+	},
+	fetchServerMessages() {
+		var self = this;
+		if (this.options.messagesUrl) {
+			$.get(this.options.messagesUrl).then((messages) => {
+				self.options.messages = messages;
+			});
+		}
 	},
 	setIsNativeUi(form) {
 		if (typeof form === 'object' && form.options && form.options.validateNative === true) {
