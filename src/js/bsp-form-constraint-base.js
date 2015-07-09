@@ -54,17 +54,17 @@ export default {
 	triggerValidEvent() {
 		this.$field.trigger(bsp_form.events.eventNameFieldValid);	
 	},
-	onInput() {
+	onInput(e, formInstance) {
 		if (this.fieldPassesNativeValidation()) {
-			this.validate();
+			this.validate(e, formInstance);
 		}
 	},
 	onReset() {
 		this.setFieldValid();
 	},
-	onSubmit() {
+	onSubmit(e, formInstance) {
 		if (this.fieldPassesNativeValidation()) {
-			this.validate();
+			this.validate(e, formInstance);
 		}
 	},
 	validate() {}
