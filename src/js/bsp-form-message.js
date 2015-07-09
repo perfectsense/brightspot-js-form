@@ -8,21 +8,16 @@ export default {
 		eventNameInput: 'bsp-field-input',
 		eventNameSubmit: 'bsp-form-submit',
 		eventNameReset: 'bsp-form-reset',
-		/**
-		 * @todo write better default messages,
-		 * possibly different defaults for different fields types,
-		 * possibly allow field name, id, and value tokens
-		 */
 		messages: {
-			badInput: 'Bad input error',
-			patternMismatch: 'Pattern mismatch error',
-			rangeOverflow: 'Range overflow error',
-			rangeUnderflow: 'Range underflow error',
-			stepMismatch: 'Step mistmatch error',
-			tooLong: 'Too long error',
-			tooShort: 'Too short error',
-			typeMismatch: 'Type mismatch error',
-			valueMissing: 'Value missing error'
+			badInput: '{title} bad input',
+			patternMismatch: '{title} pattern mismatch',
+			rangeOverflow: '{title} range overflow',
+			rangeUnderflow: '{title} range underflow',
+			stepMismatch: '{title} step mismatch',
+			tooLong: '{title} is too long',
+			tooShort: '{title} is too short',
+			typeMismatch: 'Invalid {titleLowerCase}',
+			valueMissing: 'Please enter a value for {titleLowercase}'
 		},
 		messagesUrl: undefined,
 		useNativeUi: false,
@@ -104,11 +99,26 @@ export default {
 				if (key === 'customError') {
 					message = self.field.validationMessage;
 				} else {
-					message = self.options.messages[key];
+					message = self.interpolateFieldValues( self.options.messages[key] );
 				}
 			}
 		});
 		this.$el.html(message);
+	},
+	interpolateFieldValues(str) {
+		var pattern = this.$field.attr('pattern');
+		var title = this.$field.attr('title');
+		var titleLowerCase = title.toLowerCase();
+		var titleUpperCase = title.toUpperCase();
+		var type = this.$field.attr('type');
+		var value = this.$field.val();
+		str = str.replace(/\{pattern\}/, pattern);
+		str = str.replace(/\{title\}/, title);
+		str = str.replace(/\{titleLowerCase\}/, titleLowerCase);
+		str = str.replace(/\{titleUpperCase\}/, titleUpperCase);
+		str = str.replace(/\{type\}/, type);
+		str = str.replace(/\{value\}/, value);
+		return str;
 	},
 	resetField() {
 		this.$el.removeClass('error').empty();
