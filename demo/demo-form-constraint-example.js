@@ -6,6 +6,10 @@ export default {
 	
 	__proto__: bsp_form_constraint_base, // jshint ignore:line
 
+	defaults: {
+		message: 'Field content must be the word demo'
+	},
+
 	validate() {
 		if (this.$field.val() === 'demo') {
 			this.setFieldValid();
