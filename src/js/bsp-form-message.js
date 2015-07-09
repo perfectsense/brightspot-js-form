@@ -4,10 +4,6 @@ import bsp_form from 'bsp-form';
 export default {
 	defaults: {
 		checkOnInput: true,
-		eventNameInvalidField: 'bsp-field-invalid',
-		eventNameInput: 'bsp-field-input',
-		eventNameSubmit: 'bsp-form-submit',
-		eventNameReset: 'bsp-form-reset',
 		messages: {
 			badInput: '{title} bad input',
 			patternMismatch: '{title} pattern mismatch',
@@ -16,8 +12,8 @@ export default {
 			stepMismatch: '{title} step mismatch',
 			tooLong: '{title} is too long',
 			tooShort: '{title} is too short',
-			typeMismatch: 'Invalid {titleLowerCase}',
-			valueMissing: 'Please enter a value for {titleLowercase}'
+			typeMismatch: 'Invalid value "{value}" for {titleLowerCase}',
+			valueMissing: 'Please enter a value for {titleLowerCase}'
 		},
 		messagesUrl: undefined,
 		useNativeUi: false,
@@ -42,7 +38,7 @@ export default {
 	addEvents() {
 		var self = this;
 		if (this.options.checkOnInput) {
-			this.$field.on(this.options.eventNameInput, (e, form) => {
+			this.$field.on(bsp_form.events.eventNameInput, (e, form) => {
 				self.setIsNativeUi(form);
 				if (bsp_form.fieldIsValid(self.field)) {
 					self.resetField();
@@ -51,15 +47,19 @@ export default {
 				}
 			});
 		}
-		this.$field.on(this.options.eventNameInvalidField, (e, form) => {
+		this.$field.on(bsp_form.events.eventNameFieldInvalid, (e, form) => {
 			this.setIsNativeUi(form);
 			self.populateMessage();
 		});
-		this.$field.on(this.options.eventNameReset, (e, form) => {
+		this.$field.on(bsp_form.events.eventNameFieldValid, (e, form) => {
 			this.setIsNativeUi(form);
 			self.resetField();
 		});
-		this.$field.on(this.options.eventNameSubmit, (e, form) => {
+		this.$field.on(bsp_form.events.eventNameReset, (e, form) => {
+			this.setIsNativeUi(form);
+			self.resetField();
+		});
+		this.$field.on(bsp_form.events.eventNameSubmit, (e, form) => {
 			this.setIsNativeUi(form);
 			self.resetField();
 		});

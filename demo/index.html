@@ -7,7 +7,7 @@
 
 		<h1>bsp-forms</h1>
 
-		<form method="get" class="bsp-form-loading" data-bsp-form-demo>
+		<form method="get" class="bsp-form-loading" data-bsp-form>
 			<label>Email <input type="email" name="email1" id="email1" title="Email address" required /></label>
 			<div data-bsp-form-message="#email1"></div>
 			<div data-bsp-form-message="#email1" data-bsp-form-message-options='{ "messagesUrl": "/demo-messages-data.json" }'></div>
@@ -18,8 +18,33 @@
 			<label>Password <input type="password" name="pw1" id="pw1" title="Password" required /></label>
 			<div data-bsp-form-message="#pw1"></div>
 			
-			<label>Repeat Password <input type="password" name="pw2" id="pw2" title="Password (repeated)" required /></label>
+			<label>
+				Repeat Password
+				<input
+					type="password" name="pw2" id="pw2"
+					title="Password (repeated)"
+					required
+					data-bsp-form-constraint-matches="#pw1"
+					data-bsp-form-constraint-matches-options='{
+						"message": "Passwords do not match"
+					}'
+				/>
+			</label>
 			<div data-bsp-form-message="#pw2"></div>
+
+			<label>
+				Custom validation constraint example
+				<input
+					type="text" name="custom-constraint"
+					id="custom-constraint" title="Custom Constraint"
+					required
+					data-bsp-form-constraint-demo
+					data-bsp-form-constraint-demo-options='{
+						"message": "Field content must be the word demo"
+					}'
+				/>
+			</label>
+			<div data-bsp-form-message="#custom-constraint"></div>
 
 			<div class="bsp-form-buttons">
 				<input type="submit" value="Submit" />	
@@ -30,8 +55,10 @@
 		<script src="/assets/bower/systemjs/dist/system.js"></script>
 		<script src="config.js"></script>
 		<script>
+			System.import('/assets/js/bsp-form-constraint-matches-plugin');
 			System.import('/assets/js/bsp-form-message-plugin');
-			System.import('demo-plugin');
+			System.import('/assets/js/bsp-form-plugin');
+			System.import('demo-form-constraint-plugin');
 		</script>
 
 	</body>

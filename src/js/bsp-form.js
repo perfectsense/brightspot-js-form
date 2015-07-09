@@ -1,12 +1,18 @@
 export default {
 	defaults: {
 		_allFieldsClean: true,
+		classClean: 'clean',
+		classDirty: 'dirty',
+		classSubmitted: 'submitted',
+		loadingClass: 'bsp-form-loading',
+		validateNative: false
+	},
+	events: {
+		eventNameFieldValid: 'bsp-field-valid',
 		eventNameFieldInvalid: 'bsp-field-invalid',
 		eventNameInput: 'bsp-field-input',
 		eventNameReset: 'bsp-form-reset',
-		eventNameSubmit: 'bsp-form-submit',
-		loadingClass: 'bsp-form-loading',
-		validateNative: false
+		eventNameSubmit: 'bsp-form-submit'
 	},
 	init($el, options) {
 		if (!this.hasConstraintApi()) {
@@ -32,7 +38,7 @@ export default {
 		this.resetForm();
 	},
 	addSubmitClass() {
-		this.$el.addClass('submitted');
+		this.$el.addClass(this.options.classSubmitted);
 	},
 	addEvents() {
 		var self = this;
@@ -59,7 +65,7 @@ export default {
 		this.$el.on('input', 'input, select', (e) => {
 			self.makeFormDirty();
 			self.makeFieldDirty(e.target);
-			$(e.target).trigger(self.options.eventNameInput, self);
+			$(e.target).trigger(self.events.eventNameInput, self);
 		});
 	},
 	addResetEvents() {
@@ -99,7 +105,7 @@ export default {
 		return true;
 	},
 	makeElementDirty($el) {
-		$el.addClass('dirty').removeClass('clean');
+		$el.addClass(this.options.classDirty).removeClass(this.options.classClean);
 	},
 	makeFieldDirty(field) {
 		this.makeElementDirty($(field));
@@ -112,18 +118,20 @@ export default {
 	},
 	triggerInvalidFieldEvent(field) {
 		if (typeof field !== 'undefined') {
-			$(field).trigger(this.options.eventNameFieldInvalid, this);
+			$(field).trigger(this.events.eventNameFieldInvalid, this);
 		}
 	},
 	triggerFormSubmitEvent() {
-		this.$el.find('input, select').trigger(this.options.eventNameSubmit, this);
+		this.$el.find('input, select').trigger(this.events.eventNameInput, this);
 	},
 	resetForm() {
-		this.$el.removeClass('dirty submitted').addClass('clean');
+		this.$el
+			.removeClass([this.options.classDirty,this.options.classSubmitted].join(' '))
+			.addClass(this.options.classClean);
 		this.$el.find('input, select')
-			.removeClass('dirty')
-			.addClass('clean')
-			.trigger(this.options.eventNameReset, this);
+			.removeClass(this.options.classDirty)
+			.addClass(this.options.classClean)
+			.trigger(this.events.eventNameReset, this);
 		this._allFieldsClean = true;
 	}
 };
