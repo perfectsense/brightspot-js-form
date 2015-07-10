@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 export default {
 	
 	_allFieldsClean: true,
@@ -9,7 +11,7 @@ export default {
 		classSubmitted: 'submitted',
 		loadingClass: 'bsp-form-loading',
 		selectorAllFields: 'input, select, textarea',
-		validateNative: false
+		validateNative: true
 	},
 	events: {
 		eventNameFieldValid: 'bsp-field-valid',
@@ -63,31 +65,33 @@ export default {
 		var self = this;
 		this.$el.on('submit', (e) => {
 			self.addSubmitClass();
-			self.triggerFormSubmitEvent();
-			if (!self.validate()) {
+			self.asyncObjectsClear();
+			if (!self.disableSubmitEvent) {
+				self.triggerFormSubmitEvent();
+			}
+			self.disableSubmitEvent = false;
+			if (this._asyncDeferredObjects.length) {
 				e.preventDefault();
+				$.when.apply(this, this._asyncDeferredObjects)
+					.then(() => {
+						self.asyncObjectsClear();
+						self.disableSubmitEvent = true;
+						self.$el.submit();
+					});
+			} else {
+				if (!self.validate()) {
+					e.preventDefault();
+				}
 			}
 		});
 	},
-	async() {
+	asyncConstraint() {
 		var deferred = new $.Deferred();
 		this._asyncDeferredObjects.push(deferred);
 		return deferred;
 	},
-	asyncObjectsResolved() {
-		var resolved = true;
-		$.each(this._asyncDeferredObjects, (i, $obj) => {
-			console.log($obj.state());
-			if ($obj.state() !== 'resolved') {
-				resolved = false;
-			}
-		});
-		return resolved;
-	},
 	asyncObjectsClear() {
-		console.log('clearing async objects');
 		this._asyncDeferredObjects = [];
-		console.log(this._asyncDeferredObjects);
 	},
 	setNoValidate() {
 		if (!this.options.validateNative) {
@@ -95,13 +99,12 @@ export default {
 		}
 	},
 	validate() {
-		var isValid = true;
+		this.asyncObjectsClear();
+		return this.validateFields();
+	},
+	validateFields() {
 		var self = this;
-		console.log(this._asyncDeferredObjects);
-		if (!this.asyncObjectsResolved()) {
-			this.asyncObjectsClear();
-			return false;
-		}
+		var isValid = true;
 		this.$el.find(this.options.selectorAllFields).each((i, field) => {
 			if (!self.fieldIsValid(field)) {
 				self.triggerInvalidFieldEvent(field);

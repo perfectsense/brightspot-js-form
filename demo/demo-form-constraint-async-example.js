@@ -10,9 +10,7 @@ export default {
 		message: 'Field content must be the word async'
 	},
 
-	validate(e, form) {
-
-		var deferred = form.async();
+	validate() {
 		var self = this;
 
 		setTimeout(() => {
@@ -21,7 +19,6 @@ export default {
 			} else {
 				self.setFieldInvalid();
 			}
-			deferred.resolve();
 		}, 500);
 
 	}

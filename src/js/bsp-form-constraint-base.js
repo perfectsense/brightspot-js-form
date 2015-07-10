@@ -1,28 +1,39 @@
 import $ from 'jquery';
-import bsp_form from 'bsp-form';
+import bsp_utils from 'bsp-utils';
 
 export default {
-	defaults: {
-		message: 'Field is invalid'
+	defaultsBase: {
+		message: 'Field is invalid',
+		inputEventThrottle: 1000
 	},
 	init($el, options) {
 		this.$field = $el;
 		this.field = this.$field[0];
-		this.options = $.extend(true, {}, this.defaults, options);
-		if (!bsp_form.hasConstraintApi()) {
+		this.$form = this.$field.closest('form');
+		this.bsp_form = this.$form.data('bsp-form-instance');
+		this.options = $.extend(true, {}, this.defaultsBase, this.defaults, options);
+		if (!this.bsp_form.hasConstraintApi()) {
 			return;
 		}
 		this.addEvents();
 	},
+	async() {
+		if (!this.constraint) {
+			this.constraint = this.bsp_form.asyncConstraint();
+		}
+	},
 	addEvents() {
 		var self = this;
-		this.$field.on(bsp_form.events.eventNameInput, (e, formInstance) => {
-			self.onInput.call(self, e, formInstance);
-		});
-		this.$field.on(bsp_form.events.eventNameSubmit, (e, formInstance) => {
+		this.$field.on(this.bsp_form.events.eventNameInput, bsp_utils.throttle(
+			self.options.inputEventThrottle,
+			(e, formInstance) => {
+				self.onInput.call(self, e, formInstance);
+			}
+		));
+		this.$field.on(this.bsp_form.events.eventNameSubmit, (e, formInstance) => {
 			self.onSubmit.call(self, e, formInstance);
 		});
-		this.$field.on(bsp_form.events.eventNameReset, (e, formInstance) => {
+		this.$field.on(this.bsp_form.events.eventNameReset, (e, formInstance) => {
 			self.onReset.call(self, e, formInstance);
 		});
 	},
@@ -42,21 +53,30 @@ export default {
 	},
 	setFieldValid() {
 		this.field.setCustomValidity('');
+		if (this.constraint) {
+			this.constraint.resolve();
+			this.constraint = undefined;
+		}
 		this.triggerValidEvent();
 	},
 	setFieldInvalid() {
 		this.field.setCustomValidity(this.options.message);
+		if (this.constraint) {
+			this.constraint.reject();
+			this.constraint = undefined;
+		}
 		this.triggerInvalidEvent();
 	},
 	triggerInvalidEvent() {
-		this.$field.trigger(bsp_form.events.eventNameFieldInvalid);	
+		this.$field.trigger(this.bsp_form.events.eventNameFieldInvalid);	
 	},
 	triggerValidEvent() {
-		this.$field.trigger(bsp_form.events.eventNameFieldValid);	
+		this.$field.trigger(this.bsp_form.events.eventNameFieldValid);	
 	},
 	onInput(e, formInstance) {
 		if (this.fieldPassesNativeValidation()) {
-			this.validate(e, formInstance);
+			this.async();
+			this.validate();
 		}
 	},
 	onReset() {
@@ -64,7 +84,8 @@ export default {
 	},
 	onSubmit(e, formInstance) {
 		if (this.fieldPassesNativeValidation()) {
-			this.validate(e, formInstance);
+			this.async();
+			this.validate();
 		}
 	},
 	validate() {}
