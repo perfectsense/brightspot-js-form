@@ -20,17 +20,9 @@ Then load modules into your project as seen in [Brightspot Base](https://github.
 
 Usage
 -----
-Add a `data-bsp-form` attribute to a form element. 
 
-Add a `data-bsp-form-message="#myfield"` attribute to any element to display validation messages from the selected field inside that element.
-
-All native field contraints are supported, and you can also use custom contraints. Custom contraints are added to a field with a data attribute.
-
-### Custom Classes
-
-bsp-form adds several classes to the form and its fields. These classes can be combined with native [:valid](https://developer.mozilla.org/en-US/docs/Web/CSS/%3Avalid), [:invalid](https://developer.mozilla.org/en-US/docs/Web/CSS/%3Ainvalid), and [:required](https://developer.mozilla.org/en-US/docs/Web/CSS/%3Arequired) pseudo selectors to conditionally display formatting/messages.
-*	**clean/dirty** - When the form is clean, no fields have been edited. If a single field has been edited, the field and the form lose the clean class and gain the dirty class. Other fields will keep the clean class until a edited.
-*	**submitted** - Added to the form element after submitting the form, removed if the form is reset.
+### Enabling
+To enable, add a `data-bsp-form` attribute to a form element.
 
 ### Validation Messages
 
@@ -47,14 +39,23 @@ Custom field contraints are added to a field with a data attribute like this:
 	<label>My field <input type="text" name="myfield" id="myfield" title="My field"
 	required bsp-form-constraint-myfield /></label>
 
-Then you can extend the base constraint object to create a new constraint. 
-
-Custom contraints are not evaluated until all native contraints on a field pass. In the above example, the custom contraint would not run if the user had not entered any text yet because of the "required" attribute.
+Then you can create a new constraint by extending [the base constraint object](src/js/constraints/bsp-form-constraint-base.js). 
 
 See: [a simple synchronous example](demo/demo-form-constraint-example.js), [a simple asynchronous example](demo/demo-form-constraint-async-example.js), and [a more complex reusable constraint](src/js/constraints/bsp-form-constraint-matches.js).
 
+The above contraint objects are all imported into plugins like [this one](src/js/constraints/bsp-form-constraint-matches-plugin.js) and instantiated there.
+
+Custom contraints are not evaluated until all native contraints on a field pass. In the above example, the custom contraint would not run if the user had not entered any text yet because of the "required" attribute.
+
 @todo document options
+
 @todo document object properties/methods
+
+### Custom Classes
+
+bsp-form adds several classes to the form and its fields. These classes can be combined with native [:valid](https://developer.mozilla.org/en-US/docs/Web/CSS/%3Avalid), [:invalid](https://developer.mozilla.org/en-US/docs/Web/CSS/%3Ainvalid), and [:required](https://developer.mozilla.org/en-US/docs/Web/CSS/%3Arequired) pseudo selectors to conditionally display formatting/messages.
+*	**clean/dirty** - When the form is clean, no fields have been edited. If a single field has been edited, the field and the form lose the clean class and gain the dirty class. Other fields will keep the clean class until a edited.
+*	**submitted** - Added to the form element after submitting the form, removed if the form is reset.
 
 Demo
 ----
