@@ -1,6 +1,9 @@
 export default {
+	
+	_allFieldsClean: true,
+	_asyncDeferredObjects: [],
+	
 	defaults: {
-		_allFieldsClean: true,
 		classClean: 'clean',
 		classDirty: 'dirty',
 		classSubmitted: 'submitted',
@@ -66,6 +69,26 @@ export default {
 			}
 		});
 	},
+	async() {
+		var deferred = new $.Deferred();
+		this._asyncDeferredObjects.push(deferred);
+		return deferred;
+	},
+	asyncObjectsResolved() {
+		var resolved = true;
+		$.each(this._asyncDeferredObjects, (i, $obj) => {
+			console.log($obj.state());
+			if ($obj.state() !== 'resolved') {
+				resolved = false;
+			}
+		});
+		return resolved;
+	},
+	asyncObjectsClear() {
+		console.log('clearing async objects');
+		this._asyncDeferredObjects = [];
+		console.log(this._asyncDeferredObjects);
+	},
 	setNoValidate() {
 		if (!this.options.validateNative) {
 			this.$el.attr('novalidate', '');
@@ -74,6 +97,11 @@ export default {
 	validate() {
 		var isValid = true;
 		var self = this;
+		console.log(this._asyncDeferredObjects);
+		if (!this.asyncObjectsResolved()) {
+			this.asyncObjectsClear();
+			return false;
+		}
 		this.$el.find(this.options.selectorAllFields).each((i, field) => {
 			if (!self.fieldIsValid(field)) {
 				self.triggerInvalidFieldEvent(field);
