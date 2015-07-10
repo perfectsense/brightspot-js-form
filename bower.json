@@ -9,9 +9,11 @@
     "test",
     "tests"
   ],
-  "devDependencies": {
+  "dependencies": {
     "jquery": "~2.1.4",
-    "bsp-utils": "perfectsense/brightspot-js-utils#~3.0.0",
+    "bsp-utils": "perfectsense/brightspot-js-utils#~3.0.0"
+  },
+  "devDependencies": {
     "systemjs": "git@github.com:systemjs/systemjs.git#0.18.4"
   }
 }
