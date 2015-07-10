@@ -44,13 +44,14 @@ You can output the form validation message from a specific field into any elemen
 
 Custom field contraints are added to a field with a data attribute like this:
 
-	<label>My field <input type="text" name="myfield" id="myfield" title="My field" required bsp-form-constraint-myfield /></label>
+	<label>My field <input type="text" name="myfield" id="myfield" title="My field"
+	required bsp-form-constraint-myfield /></label>
 
 Then you can extend the base constraint object to create a new constraint. 
 
 Custom contraints are not evaluated until all native contraints on a field pass. In the above example, the custom contraint would not run if the user had not entered any text yet because of the "required" attribute.
 
-See: [a simple synchronous example](demo/demo-form-constraint-example.js), [a simple asynchronous example](demo/demo-form-constraint-async-example.js), and [a more complex reusable field](src/js/constraints/bsp-form-constraint-matches.js).
+See: [a simple synchronous example](demo/demo-form-constraint-example.js), [a simple asynchronous example](demo/demo-form-constraint-async-example.js), and [a more complex reusable constraint](src/js/constraints/bsp-form-constraint-matches.js).
 
 @todo document options
 @todo document object properties/methods
