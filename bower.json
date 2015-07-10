@@ -1,13 +1,9 @@
 {
-  "name": "brightspot-js-forms",
-  "version": "0.0.0",
-  "license": "MIT",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
+  "authors": [
+    {
+      "homepage": "http://www.perfectsensedigital.com/",
+      "name": "Perfect Sense Digital"
+    }
   ],
   "dependencies": {
     "jquery": "~2.1.4",
@@ -15,5 +11,20 @@
   },
   "devDependencies": {
     "systemjs": "git@github.com:systemjs/systemjs.git#0.18.4"
-  }
+  },
+  "homepage": "https://github.com/perfectsense/brightspot-js-forms",
+  "ignore": ["demo","Gruntfile.js","package.json",".gitignore"],
+  "keywords": [
+    "brightspot",
+    "jquery"
+  ],
+  "license": "MIT",
+  "main": [
+    "src/js/bsp-form-message-plugin.js",
+    "src/js/bsp-form-message.js",
+    "src/js/bsp-form-plugin.js",
+    "src/js/bsp-form.js"
+  ],
+  "name": "brightspot-js-forms",
+  "version": "0.0.1"
 }
