@@ -5,13 +5,12 @@ Introduction
 ------------
 
 Provides utlities and plugins to build an alternate, highly flexible user interface for HTML forms inside [Brightspot CMS](https://github.com/perfectsense/brightspot-cms).
-*	Replaces the native validation user interface, but still uses native [HTML5 constraint validation](http://www.html5rocks.com/en/tutorials/forms/constraintvalidation/) to validate fields
+*	Replaces the native form validation user interface, but still uses native [HTML5 constraint validation](http://www.html5rocks.com/en/tutorials/forms/constraintvalidation/) to validate fields
 *	Can revert to native UI if needed
 *	Adds some helper classes on the form and input elements to aid styling
 *	Allows outputting field messages anywhere on the page
-*	Attempts to remedy some browser inconsistences
 *	Can use native browser validation messages or custom messages
-*	Hooks for custom validation in non-native and native modes
+*	Custom field constraints can be written with very little code by extending a base class. See: [a simple synchronous example](demo/demo-form-constraint-example.js), [a simple asynchronous example](demo/demo-form-constraint-async-example.js), and [a more complex reusable field](src/js/constraints/bsp-form-constraint-matches.js).
 
 Custom Classes
 --------------
