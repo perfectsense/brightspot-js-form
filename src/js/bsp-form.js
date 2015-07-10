@@ -11,7 +11,7 @@ export default {
 		classSubmitted: 'submitted',
 		loadingClass: 'bsp-form-loading',
 		selectorAllFields: 'input, select, textarea',
-		validateNative: true
+		validateNative: false
 	},
 	events: {
 		eventNameFieldValid: 'bsp-field-valid',

@@ -10,10 +10,9 @@
 		<form method="get" class="bsp-form-loading" autocomplete="off" data-bsp-form>
 			<label>Email <input type="email" name="email1" id="email1" title="Email address" required /></label>
 			<div data-bsp-form-message="#email1"></div>
-			<div data-bsp-form-message="#email1" data-bsp-form-message-options='{ "messagesUrl": "/demo-messages-data.json" }'></div>
 
 			<label>URL <input type="url" name="url1" id="url1" title="URL" required /></label>
-			<div data-bsp-form-message="#url1"></div>
+			<div data-bsp-form-message="#url1" data-bsp-form-message-options='{ "messagesUrl": "/demo-messages-data.json" }'></div>
 
 			<label>Password <input type="password" name="pw1" id="pw1" title="Password" required /></label>
 			<div data-bsp-form-message="#pw1"></div>
@@ -47,7 +46,7 @@
 		<script src="/assets/bower/systemjs/dist/system.js"></script>
 		<script src="config.js"></script>
 		<script>
-			System.import('/assets/js/bsp-form-constraint-matches-plugin');
+			System.import('/assets/js/constraints/bsp-form-constraint-matches-plugin');
 			System.import('/assets/js/bsp-form-message-plugin');
 			System.import('/assets/js/bsp-form-plugin');
 			System.import('demo-form-constraint-example-plugin');
