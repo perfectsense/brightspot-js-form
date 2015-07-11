@@ -37,7 +37,7 @@ module.exports = function(config) {
 			require('karma-systemjs')
 		],
 		systemjs: {
-			configFile: 'src/js/config.js',
+			configFile: 'spec/config.js',
 			config: {
 				paths: paths,
 				transpiler: 'babel'
