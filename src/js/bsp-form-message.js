@@ -3,7 +3,9 @@ import bsp_form from 'bsp-form';
 
 export default {
 	defaults: {
+		classError: 'error',
 		checkOnInput: true,
+		displayOnly: false,
 		messages: {
 			badInput: '{title} bad input',
 			patternMismatch: '{title} pattern mismatch',
@@ -22,8 +24,10 @@ export default {
 	init($el, options) {
 		var fieldSelector = $el.data('bsp-form-message');
 		this.$el = $el;
-		this.options = $.extend(true, {}, options, this.defaults);
+		this.options = $.extend(true, {}, this.defaults, options);
 		this.$field = $(fieldSelector);
+		this.$form = this.$field.closest('form');
+		this.bsp_form = this.$form.data('bsp-form-instance');
 		this.field = this.$field[0];
 		if (!this.$field.length || !bsp_form.hasConstraintApi()) {
 			return;
@@ -39,16 +43,21 @@ export default {
 		var self = this;
 		if (this.options.checkOnInput) {
 			this.$field.on(bsp_form.events.eventNameInput, (e, form) => {
-				self.setIsNativeUi(form);
 				if (bsp_form.fieldIsValid(self.field)) {
 					self.resetField();
 				} else {
-					self.populateMessage();
+					self.setMessage();
+					self.writeMessage();
 				}
 			});
 		}
+		this.$field.on(bsp_form.events.eventNameInit, (e, form) => {
+			self.options.useNativeUi = form.options.validateNative;
+			self.setMessage();
+		});
 		this.$field.on(bsp_form.events.eventNameFieldInvalid, (e, form) => {
-			self.populateMessage();
+			self.setMessage();
+			self.writeMessage();
 		});
 		this.$field.on(bsp_form.events.eventNameFieldValid, (e, form) => {
 			self.resetField();
@@ -65,27 +74,11 @@ export default {
 		if (this.options.messagesUrl) {
 			$.get(this.options.messagesUrl).then((messages) => {
 				self.options.messages = messages;
+				self.setMessage();
 			});
 		}
 	},
-	setIsNativeUi(form) {
-		if (typeof form === 'object' && form.options && form.options.validateNative === true) {
-			this.options.useNativeUi = true;
-		} else {
-			this.options.useNativeUi = false;
-		}
-	},
-	populateMessage() {
-		if (!this.options.useNativeUi) {
-			if (this.options.useNativeMessages) {
-				this.$el.html(this.field.validationMessage);
-			} else {
-				this.populateNonNativeMessage();
-			}
-			this.$el.addClass('error');
-		}
-	},
-	populateNonNativeMessage() {
+	setMessage() {
 		var firstErrorFound = false;
 		var message = '';
 		var self = this;
@@ -99,7 +92,16 @@ export default {
 				}
 			}
 		});
-		this.$el.html(message);
+		if (this.options.useNativeUi && !this.options.displayOnly) {
+			this.field.setCustomValidity(message);
+		} else {
+			this._message = message;
+		}
+	},
+	writeMessage() {
+		if (!this.options.useNativeUi) {
+			this.$el.addClass(this.options.classError).html(this._message);
+		}
 	},
 	interpolateFieldValues(str) {
 		var name = this.$field.attr('name');
@@ -119,6 +121,6 @@ export default {
 		return str;
 	},
 	resetField() {
-		this.$el.removeClass('error').empty();
+		this.$el.removeClass(this.options.classError).empty();
 	}
 };

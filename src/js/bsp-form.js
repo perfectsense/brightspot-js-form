@@ -11,11 +11,12 @@ export default {
 		classSubmitted: 'submitted',
 		loadingClass: 'bsp-form-loading',
 		selectorAllFields: 'input, select, textarea',
-		validateNative: false
+		validateNative: true
 	},
 	events: {
 		eventNameFieldValid: 'bsp-field-valid',
 		eventNameFieldInvalid: 'bsp-field-invalid',
+		eventNameInit: 'bsp-form-init',
 		eventNameInput: 'bsp-field-input',
 		eventNameReset: 'bsp-form-reset',
 		eventNameSubmit: 'bsp-form-submit'
@@ -24,12 +25,13 @@ export default {
 		if (!this.hasConstraintApi()) {
 			return;
 		}
+		$el.data('bsp-form-instance', this);
 		this.$el = $el;
 		this.options = $.extend(true, {}, this.defaults, options);
 		this.setNoValidate();
 		this.addEvents();
-		$el.data('bsp-form-instance', this);
 		this.addFormLoadClasses();
+		this.triggerInitEvent();
 	},
 	hasConstraintApi() {
 		var dummy = document.createElement('input');
@@ -140,6 +142,12 @@ export default {
 	},
 	triggerFormSubmitEvent() {
 		this.$el.find(this.options.selectorAllFields).trigger(this.events.eventNameSubmit, this);
+	},
+	triggerInitEvent() {
+		var self = this;
+		$(() => {
+			self.$el.find(self.options.selectorAllFields).trigger(self.events.eventNameInit, self);
+		});
 	},
 	resetForm() {
 		this.$el

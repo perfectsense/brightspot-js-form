@@ -63,7 +63,7 @@ describe('bsp-form', () => {
 		});
 	});
 
-	xdescribe('addFormLoadClasses specs', () => {
+	describe('addFormLoadClasses specs', () => {
 
 		var form;
 
@@ -74,6 +74,7 @@ describe('bsp-form', () => {
 
 		it('should remove loading class', () => {
 			spyOn(form.$el, 'removeClass');
+			spyOn(form, 'resetForm');
 			form.options = {
 				loadingClass: 'test'
 			};
@@ -81,6 +82,97 @@ describe('bsp-form', () => {
 			expect(form.$el.removeClass).toHaveBeenCalledWith('test');
 		});
 
+		it('should call resetForm', () => {
+			spyOn(form.$el, 'removeClass');
+			spyOn(form, 'resetForm');
+			form.options = {
+				loadingClass: 'test'
+			};
+			form.addFormLoadClasses();
+			expect(form.resetForm).toHaveBeenCalled();
+		});
+
+	});
+
+	describe('addSubmitClass specs', () => {
+		var form;
+
+		beforeEach(() => {
+			form = Object.create(bsp_form);
+			form.$el = $('<div></div>');
+		});
+
+		it('should add the submit class to the element', () => {
+			spyOn(form.$el, 'addClass');
+			form.options = {
+				classSubmitted: 'test'
+			};
+			form.addSubmitClass();
+			expect(form.$el.addClass).toHaveBeenCalledWith('test');
+		});
+	});
+
+	describe('addEvents specs', () => {
+		var form;
+
+		beforeEach(() => {
+			form = Object.create(bsp_form);
+			form.$el = $('<div></div>');
+		});
+
+		it('should call expected functions', () => {
+			spyOn(form, 'addSubmitEvents');
+			spyOn(form, 'addInputEvents');
+			spyOn(form, 'addResetEvents');
+			form.addEvents();
+			expect(form.addSubmitEvents).toHaveBeenCalled();
+			expect(form.addInputEvents).toHaveBeenCalled();
+			expect(form.addResetEvents).toHaveBeenCalled();
+		});
+	});
+
+	describe('addInputEvents specs', () => {
+		var form;
+
+		beforeEach(() => {
+			form = Object.create(bsp_form);
+			form.$el = $('<div></div>');
+		});
+
+		it('should pass the expected arguments to the input event', () => {
+			form.options = {
+				selectorAllFields: 'test'
+			};
+			spyOn(form.$el, 'on');
+			form.addInputEvents();
+			expect(form.$el.on).toHaveBeenCalledWith('input', 'test', jasmine.any(Function));
+		});
+
+		it('should create a callback on the input event that calls the expected functions', () => {
+			var callback;
+			var fakeEvent = {
+				target: { 'test': 'test' }
+			};
+			form.events = {
+				eventNameInput: 'test'
+			};
+			form.options = {
+				selectorAllFields: 'test'
+			};
+			spyOn(form, 'makeFormDirty');
+			spyOn(form, 'makeFieldDirty');
+			spyOn(form.$el, 'on').and.callFake((event, selector, cb) => {
+				callback = cb;
+			});
+			spyOn($.fn, 'init').and.callThrough();
+			spyOn($.fn, 'trigger');
+			form.addInputEvents();
+			callback(fakeEvent);
+			expect(form.makeFieldDirty).toHaveBeenCalledWith(fakeEvent.target);
+			expect(form.makeFormDirty).toHaveBeenCalled();
+			//expect($.fn.init).toHaveBeenCalledWith(fakeEvent.target);
+			//expect($.fn.trigger).toHaveBeenCalledWith('test', jasmine.any(Object));
+		});
 	});
 
 });
