@@ -113,7 +113,7 @@ export default {
 				}
 			});
 			if (this.options.useNativeUi && !this.options.displayOnly) {
-				this.field.setCustomValidity(message);
+				//this.field.setCustomValidity(message);
 			} else {
 				this._message = message;
 			}
