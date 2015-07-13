@@ -6,6 +6,8 @@ export default {
 
 	__proto__: bsp_form_constraint_base, // jshint ignore:line
 
+	name: "constraintMatches",
+
 	init($el, options) {
 		this.$match = $( $el.data('bsp-form-constraint-matches') );
 		if (!this.$match.length) {

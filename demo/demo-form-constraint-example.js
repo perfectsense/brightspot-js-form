@@ -6,6 +6,8 @@ export default {
 	
 	__proto__: bsp_form_constraint_base, // jshint ignore:line
 
+	name: "constraintExample",
+
 	defaults: {
 		message: 'Field content must be the word demo'
 	},

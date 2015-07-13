@@ -10,7 +10,6 @@
 		<form method="get" class="bsp-form-loading" autocomplete="off" data-bsp-form>
 			<label>Email <input type="email" name="email1" id="email1" title="Email address" required /></label>
 			<div data-bsp-form-message="#email1"></div>
-			<div data-bsp-form-message="#email1" data-bsp-form-message-options='{ "messagesUrl": "/demo-messages-data.json", "displayOnly": true }'></div>
 
 			<label>URL <input type="url" name="url1" id="url1" title="URL" required /></label>
 			<div data-bsp-form-message="#url1" data-bsp-form-message-options='{ "messagesUrl": "/demo-messages-data.json" }'></div>
@@ -25,12 +24,16 @@
 					title="Password (repeated)"
 					required
 					data-bsp-form-constraint-matches="#pw1"
-					data-bsp-form-constraint-matches-options='{
-						"message": "Passwords do not match"
-					}'
 				/>
 			</label>
-			<div data-bsp-form-message="#pw2"></div>
+			<div
+				data-bsp-form-message="#pw2"
+				data-bsp-form-message-options='{
+					"messages": {
+						"constraintMatches": "Passwords do not match"
+					}
+				}'
+			></div>
 
 			<label>Custom constraint example <input type="text" name="custom-constraint" id="custom-constraint" title="Custom constraint" required data-demo-form-constraint-example /></label>
 			<div data-bsp-form-message="#custom-constraint"></div>

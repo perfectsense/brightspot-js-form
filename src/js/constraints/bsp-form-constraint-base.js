@@ -2,9 +2,13 @@ import $ from 'jquery';
 import bsp_utils from 'bsp-utils';
 
 export default {
+	name: "constraintBase",
 	defaultsBase: {
 		message: 'Field is invalid',
 		inputEventThrottle: 1000
+	},
+	events: {
+		eventNameSetMessage: 'setMessage'
 	},
 	init($el, options) {
 		this.$field = $el;
@@ -35,6 +39,11 @@ export default {
 		});
 		this.$field.on(this.bsp_form.events.eventNameReset, (e, formInstance) => {
 			self.onReset.call(self, e, formInstance);
+		});
+		this.$field.on(this.events.eventNameSetMessage, (e, data) => {
+			if (data.key === self.name && data.value) {
+				self.options.message = data.value;
+			}
 		});
 	},
 	fieldPassesNativeValidation(field) {
