@@ -28,6 +28,6 @@
     "src/js/bsp-form-plugin.js",
     "src/js/bsp-form.js"
   ],
-  "name": "brightspot-js-forms",
-  "version": "0.0.1"
+  "name": "bsp-form",
+  "version": "0.0.2"
 }
