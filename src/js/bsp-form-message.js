@@ -140,10 +140,14 @@ export default {
 		var name = this.$field.attr('name');
 		var pattern = this.$field.attr('pattern');
 		var title = this.$field.attr('title');
-		var titleLowerCase = title.toLowerCase();
-		var titleUpperCase = title.toUpperCase();
+		var titleLowerCase;
+		var titleUpperCase;
 		var type = this.$field.attr('type');
 		var value = this.$field.val();
+		if (title && title.toLowerCase) {
+			titleLowerCase = title.toLowerCase();
+			titleUpperCase = title.toUpperCase();
+		}
 		str = str.replace(/\{name\}/, name);
 		str = str.replace(/\{pattern\}/, pattern);
 		str = str.replace(/\{title\}/, title);
