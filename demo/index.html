@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html data-bsp-useragent>
 	<head>
 		<link rel="stylesheet" type="text/css" href="demo.css" />
+		<link rel="stylesheet" type="text/css" href="/assets/bower/pikaday/css/pikaday.css" />
 	</head>
 	<body>
 
@@ -41,6 +42,10 @@
 			<label>Custom async constraint example <input type="text" name="custom-async-constraint" id="custom-async-constraint" title="Custom async constraint" required data-demo-form-constraint-async-example /></label>
 			<div data-bsp-form-message="#custom-async-constraint"></div>
 
+			<label>Date field <input type="date" name="date1" id="date1" data-bsp-form-field-date /></label>
+
+			<label>Datetime local field <input type="datetime-local" name="datetime1" id="datetime1" data-bsp-form-field-datetime-local /></label>
+
 			<div class="bsp-form-buttons">
 				<input type="submit" value="Submit" />	
 				<input type="reset" value="Reset" formnovalidate />
@@ -51,6 +56,8 @@
 		<script src="config.js"></script>
 		<script>
 			System.import('/assets/js/constraints/bsp-form-constraint-matches-plugin');
+			System.import('/assets/bower/bsp-useragent/src/js/bsp-useragent-plugin.js');
+			System.import('/assets/js/fields/bsp-form-field-date-plugin');
 			System.import('/assets/js/bsp-form-message-plugin');
 			System.import('/assets/js/bsp-form-plugin');
 			System.import('demo-form-constraint-example-plugin');
