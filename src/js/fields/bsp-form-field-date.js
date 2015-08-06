@@ -1,4 +1,4 @@
-import dt from 'datetimepicker';
+import dt from 'jquery.datetimepicker';
 import BspFormField from 'bsp-form-field';
 
 class BspFormFieldDate extends BspFormField {
