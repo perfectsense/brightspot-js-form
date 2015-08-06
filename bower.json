@@ -8,8 +8,8 @@
   "dependencies": {
     "jquery": "~2.1.4",
     "bsp-utils": "perfectsense/brightspot-js-utils#~3.0.0",
-    "pikaday": "~1.3.3",
-    "bsp-useragent": "rustytanton/brightspot-js-useragent#0.0.2"
+    "bsp-useragent": "rustytanton/brightspot-js-useragent#0.0.2",
+    "datetimepicker": "~2.4.5"
   },
   "devDependencies": {
     "systemjs": "git@github.com:systemjs/systemjs.git#0.18.4"
@@ -30,6 +30,9 @@
     "src/js/constraints/bsp-form-constraint-matches-plugin.js",
     "src/js/constraints/bsp-form-constraint-matches.js",
     "src/js/constraints/bsp-form-constraint-base.js",
+    "src/js/fields/bsp-form-field-date-plugin.js",
+    "src/js/fields/bsp-form-field-date.js",
+    "src/js/fields/bsp-form-field.js",
     "src/js/bsp-form-message-plugin.js",
     "src/js/bsp-form-message.js",
     "src/js/bsp-form-plugin.js",
