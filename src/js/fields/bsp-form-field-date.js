@@ -1,3 +1,4 @@
+import detect from 'bsp-feature-detect';
 import dt from 'jquery.datetimepicker';
 import BspFormField from 'bsp-form-field';
 
@@ -10,13 +11,15 @@ class BspFormFieldDate extends BspFormField {
 	}
 
 	renderFallback() {
-		this.el.setAttribute('type', 'text');
+		if (!detect.isTouchDevice) {
+			this.el.setAttribute('type', 'text');
 
-		// can't avoid using jquery here
-		this.$el.datetimepicker({
-			format: 'Y-m-d',
-			timepicker: false
-		});
+			// can't avoid using jquery here
+			this.$el.datetimepicker({
+				format: 'Y-m-d',
+				timepicker: false
+			});
+		}
 	}
 
 }
@@ -24,15 +27,7 @@ class BspFormFieldDate extends BspFormField {
 export default {
 	init($el, options) {
 		$(() => {
-			new BspFormFieldDate($el);
-			var ua = $('html').data('bsp-useragent');
-			if(!ua.isTouchDevice) {
-				$el.attr('type','text');
-				$el.datetimepicker({
-					format: 'Y-m-d',
-					timepicker: false
-				});
-			}
+			new BspFormFieldDate($el, options);
 		});
 	}
 };

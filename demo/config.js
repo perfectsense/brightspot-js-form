@@ -9,9 +9,9 @@ System.config({
     'bsp-form-field-date': '/assets/js/fields/bsp-form-field-date.js',
   	'bsp-form-message': '/assets/js/bsp-form-message.js',
   	'bsp-utils': '/assets/bower/bsp-utils/bsp-utils.js',
-    'bsp-useragent': '/assets/bower/bsp-useragent/src/js/bsp-useragent.js',
+    'bsp-feature-detect': '/assets/bower/bsp-feature-detect/src/js/bsp-feature-detect.js',
   	'jquery': '/assets/bower/jquery/dist/jquery.js',
-    'datetimepicker': '/assets/bower/datetimepicker/jquery.datetimepicker.js'
+    'jquery.datetimepicker': '/assets/bower/datetimepicker/jquery.datetimepicker.js'
   },
   transpiler: 'babel'
 });
