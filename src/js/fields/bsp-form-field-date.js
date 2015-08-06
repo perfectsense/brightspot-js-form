@@ -14,7 +14,6 @@ class BspFormFieldDate extends BspFormField {
 		if (!detect.isTouchDevice) {
 			this.el.setAttribute('type', 'text');
 
-			// can't avoid using jquery here
 			this.$el.datetimepicker({
 				format: 'Y-m-d',
 				timepicker: false

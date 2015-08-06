@@ -23,7 +23,7 @@ export default class BspFormField {
 		privateData.set(this, { "options": merged });
 	}
 
-	constructor($el, options) {
+	constructor($el, options = {}) {
 		this.defaults = this.setDefaults();
 		this.$el = $el;
 		this.el = $el[0];
