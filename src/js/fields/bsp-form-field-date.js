@@ -24,9 +24,7 @@ class BspFormFieldDate extends BspFormField {
 export default {
 	init($el, options) {
 		$(() => {
-			new BspFormFieldDate($el, {
-				'test': 'test'
-			});
+			new BspFormFieldDate($el);
 			var ua = $('html').data('bsp-useragent');
 			if(!ua.isTouchDevice) {
 				$el.attr('type','text');

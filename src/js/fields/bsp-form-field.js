@@ -19,19 +19,14 @@ export default class BspFormField {
 		return privateData.get(this).options;
 	}
 	set options(options) {
-		// can't avoid jquery here for now because 
-		// html5 offers no deep copy & extend capability
-		// (Object.assign spec calls for shallow copy even
-		// if it were supported)
 		var merged = $.extend(true, {}, this.defaults, options);
-
 		privateData.set(this, { "options": merged });
 	}
 
 	constructor($el, options) {
 		this.defaults = this.setDefaults();
 		this.$el = $el;
-		this.el = $el[0]; // for a jquery-free future :)
+		this.el = $el[0];
 		this.options = options;
 		this.renderFallback();
 	}
