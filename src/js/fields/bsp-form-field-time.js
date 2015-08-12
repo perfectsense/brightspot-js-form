@@ -2,8 +2,8 @@ import detect from 'bsp-feature-detect';
 import dt from 'jquery.datetimepicker';
 import BspFormField from 'bsp-form-field';
 
-class BspFormFieldDatetimeLocal extends BspFormField {
-
+class BspFormFieldTime extends BspFormField {
+	
 	addLeadingZero(num) {
 		if (num < 10) {
 			return "0" + num;
@@ -13,16 +13,15 @@ class BspFormFieldDatetimeLocal extends BspFormField {
 	}
 
 	formattedInputTime(str) {
-		// input format is 1996-12-19T16:39:57
-		// @see http://www.w3.org/TR/html-markup/datatypes.html#form.data.datetime-local
+		// input format is 13:00
+		// @see http://www.w3.org/TR/html-markup/datatypes.html#form.data.time
 		var d = new Date(str);
-		return d.getFullYear() + '-' + this.addLeadingZero( d.getMonth()+1 ) + '-' + this.addLeadingZero( d.getDate() ) + 'T' + this.addLeadingZero( d.getHours() ) + ':' + this.addLeadingZero( d.getMinutes() );
+		return this.addLeadingZero( d.getHours() ) + ':' + this.addLeadingZero( d.getMinutes() );
 	}
 
 	setDefaults() {
 		return {
-			lang: 'en',	
-			step: 15,
+			datepicker: false,
 			formatTime: 'g:ia'
 		};
 	}
@@ -43,7 +42,7 @@ class BspFormFieldDatetimeLocal extends BspFormField {
 export default {
 	init($el, options) {
 		$(() => {
-			new BspFormFieldDatetimeLocal($el, options);
+			new BspFormFieldTime($el, options);
 		});
 	}
 };
