@@ -34,6 +34,8 @@
     "src/js/fields/bsp-form-field-date.js",
     "src/js/fields/bsp-form-field-datetime-local-plugin.js",
     "src/js/fields/bsp-form-field-datetime-local.js",
+    "src/js/fields/bsp-form-field-month-plugin.js",
+    "src/js/fields/bsp-form-field-month.js",
     "src/js/fields/bsp-form-field.js",
     "src/js/bsp-form-message-plugin.js",
     "src/js/bsp-form-message.js",

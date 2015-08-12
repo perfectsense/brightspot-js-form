@@ -27,7 +27,7 @@
 			<label>Email <input type="email" name="email1" id="email1" title="Email address" required /></label>
 			<div data-bsp-form-message="#email1"></div>
 
-			<label>Month <input type="month" name="month1" id="month1" title="Month" required /></label>
+			<label>Month <input type="month" name="month1" id="month1" title="Month" data-bsp-form-field-month required /></label>
 			<div data-bsp-form-message="#month1"></div>
 
 			<label>Number <input type="number" name="number1" id="number1" title="Number" required /></label>
@@ -106,6 +106,7 @@
 			System.import('/assets/js/constraints/bsp-form-constraint-matches-plugin');
 			System.import('/assets/js/fields/bsp-form-field-date-plugin');
 			System.import('/assets/js/fields/bsp-form-field-datetime-local-plugin');
+			System.import('/assets/js/fields/bsp-form-field-month-plugin');
 			System.import('/assets/js/bsp-form-message-plugin');
 			System.import('/assets/js/bsp-form-plugin');
 			System.import('demo-form-constraint-example-plugin');
