@@ -8,7 +8,7 @@
   "dependencies": {
     "jquery": "~2.1.4",
     "bsp-utils": "perfectsense/brightspot-js-utils#~3.0.0",
-    "bsp-feature-detect": "rustytanton/brightspot-js-feature-detect#brightspot-base",
+    "bsp-feature-detect": "rustytanton/brightspot-js-feature-detect#^1.0.0",
     "datetimepicker": "~2.4.5"
   },
   "devDependencies": {
