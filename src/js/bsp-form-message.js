@@ -74,7 +74,11 @@ export default {
 		);
 	},
 	setUiMode() {
-		this.options.useNativeUi = this.bsp_form.options.validateNative;
+		if(this.bsp_form) {
+            this.options.useNativeUi = this.bsp_form.options.validateNative;
+        } else {
+            this.options.useNativeUi = false;
+        }
 	},
 	fetchServerMessages() {
 		var self = this;
