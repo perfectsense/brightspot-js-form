@@ -7,13 +7,20 @@
   ],
   "dependencies": {
     "jquery": "~2.1.4",
-    "bsp-utils": "perfectsense/brightspot-js-utils#~3.0.0"
+    "bsp-utils": "perfectsense/brightspot-js-utils#~3.0.0",
+    "bsp-feature-detect": "perfectsense/brightspot-js-feature-detect#^1.0.0",
+    "datetimepicker": "~2.4.5"
   },
   "devDependencies": {
     "systemjs": "git@github.com:systemjs/systemjs.git#0.18.4"
   },
   "homepage": "https://github.com/perfectsense/brightspot-js-forms",
-  "ignore": ["demo","Gruntfile.js","package.json",".gitignore"],
+  "ignore": [
+    "demo",
+    "Gruntfile.js",
+    "package.json",
+    ".gitignore"
+  ],
   "keywords": [
     "brightspot",
     "jquery"
@@ -23,6 +30,15 @@
     "src/js/constraints/bsp-form-constraint-matches-plugin.js",
     "src/js/constraints/bsp-form-constraint-matches.js",
     "src/js/constraints/bsp-form-constraint-base.js",
+    "src/js/fields/bsp-form-field-date-plugin.js",
+    "src/js/fields/bsp-form-field-date.js",
+    "src/js/fields/bsp-form-field-datetime-local-plugin.js",
+    "src/js/fields/bsp-form-field-datetime-local.js",
+    "src/js/fields/bsp-form-field-month-plugin.js",
+    "src/js/fields/bsp-form-field-month.js",
+    "src/js/fields/bsp-form-field-time-plugin.js",
+    "src/js/fields/bsp-form-field-time.js",
+    "src/js/fields/bsp-form-field.js",
     "src/js/bsp-form-message-plugin.js",
     "src/js/bsp-form-message.js",
     "src/js/bsp-form-plugin.js",

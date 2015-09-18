@@ -1,18 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html data-bsp-useragent>
 	<head>
 		<link rel="stylesheet" type="text/css" href="demo.css" />
+		<link rel="stylesheet" type="text/css" href="/assets/bower/datetimepicker/jquery.datetimepicker.css" />
 	</head>
 	<body>
 
 		<h1>bsp-forms</h1>
 
 		<form method="get" class="bsp-form-loading" autocomplete="off" data-bsp-form>
+			
+			<h3>inputs</h3>
+
+			<label>Checkbox <input type="checkbox" name="cb1" id="cb1" title="Checkbox" required /></label>
+			<div data-bsp-form-message="#cb1"></div>
+
+			<label>Color <input type="color" name="color1" id="color1" title="Color" required /></label>
+			<div data-bsp-form-message="#color1"></div>
+
+			<label>Date <input type="date" name="date1" id="date1" data-bsp-form-field-date title="Date" required /></label>
+			<div data-bsp-form-message="#date1"></div>
+
+			<label>Datetime-local <input type="datetime-local" name="datetime1" id="datetime1" data-bsp-form-field-datetime-local title="Datetime-local" required /></label>
+			<div data-bsp-form-message="#datetime1"></div>
+
 			<label>Email <input type="email" name="email1" id="email1" title="Email address" required /></label>
 			<div data-bsp-form-message="#email1"></div>
 
-			<label>URL <input type="url" name="url1" id="url1" title="URL" required /></label>
-			<div data-bsp-form-message="#url1" data-bsp-form-message-options='{ "messagesUrl": "/demo-messages-data.json" }'></div>
+			<label>Month <input type="month" name="month1" id="month1" title="Month" data-bsp-form-field-month required /></label>
+			<div data-bsp-form-message="#month1"></div>
+
+			<label>Number <input type="number" name="number1" id="number1" title="Number" required /></label>
+			<div data-bsp-form-message="#number1"></div>
 
 			<label>Password <input type="password" name="pw1" id="pw1" title="Password" required /></label>
 			<div data-bsp-form-message="#pw1"></div>
@@ -35,6 +54,33 @@
 				}'
 			></div>
 
+			<label>Radio Option 1 <input type="radio" name="radio" id="radio1" title="Radio" value="1" required /></label>
+			<label>Radio Option 2 <input type="radio" name="radio" id="radio2" title="Radio" value="2" required /></label>
+			<div data-bsp-form-message="[name=radio]"></div>
+
+			<label>Range <input type="range" name="range1" id="range1" title="Range" required /></label>
+			<div data-bsp-form-message="#range1"></div>
+
+			<label>Search <input type="search" name="search1" id="search1" title="Search" required /></label>
+			<div data-bsp-form-message="#search1"></div>
+
+			<label>Telephone <input type="tel" name="tel1" id="tel1" title="Telephone" required /></label>
+			<div data-bsp-form-message="#tel1"></div>
+
+			<label>Text <input type="text" name="text1" id="text1" title="Text" required /></label>
+			<div data-bsp-form-message="#text1"></div>
+
+			<label>Time <input type="time" name="time1" id="time1" title="Time" data-bsp-form-field-time required /></label>
+			<div data-bsp-form-message="#time1"></div>
+
+			<label>URL <input type="url" name="url1" id="url1" title="URL" required /></label>
+			<div data-bsp-form-message="#url1"></div>
+
+			<!-- jacked in almost every browser -->
+			<!-- <label>Week field <input type="week" name="week1" id="week1" /></label>-->
+
+			<h3>Custom constraints</h3>	
+
 			<label>Custom constraint example <input type="text" name="custom-constraint" id="custom-constraint" title="Custom constraint" required data-demo-form-constraint-example /></label>
 			<div data-bsp-form-message="#custom-constraint"></div>
 
@@ -45,12 +91,23 @@
 				<input type="submit" value="Submit" />	
 				<input type="reset" value="Reset" formnovalidate />
 			</div>
+
 		</form>
+
+		<p>Unsupported types:</p>
+		<ul>
+			<li>datetime (use date or datetime-local instead)</li>
+			<li>week (support is poor in mobile browsers)</li>
+		</ul>
 
 		<script src="/assets/bower/systemjs/dist/system.js"></script>
 		<script src="config.js"></script>
 		<script>
 			System.import('/assets/js/constraints/bsp-form-constraint-matches-plugin');
+			System.import('/assets/js/fields/bsp-form-field-date-plugin');
+			System.import('/assets/js/fields/bsp-form-field-datetime-local-plugin');
+			System.import('/assets/js/fields/bsp-form-field-month-plugin');
+			System.import('/assets/js/fields/bsp-form-field-time-plugin');
 			System.import('/assets/js/bsp-form-message-plugin');
 			System.import('/assets/js/bsp-form-plugin');
 			System.import('demo-form-constraint-example-plugin');
