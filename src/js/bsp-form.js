@@ -73,6 +73,7 @@ export default {
 			}
 			self.disableSubmitEvent = false;
 			if (this._asyncDeferredObjects.length) {
+				self.validateFields();
 				e.preventDefault();
 				$.when.apply(this, this._asyncDeferredObjects)
 					.then(() => {
