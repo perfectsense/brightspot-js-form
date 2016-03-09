@@ -9,7 +9,7 @@
     "jquery": "~2.1.4",
     "bsp-utils": "perfectsense/brightspot-js-utils#~3.0.0",
     "bsp-feature-detect": "perfectsense/brightspot-js-feature-detect#^1.0.0",
-    "datetimepicker": "~2.4.5"
+    "datetimepicker": "2.4.5"
   },
   "devDependencies": {
     "systemjs": "git@github.com:systemjs/systemjs.git#0.18.4"
@@ -45,5 +45,5 @@
     "src/js/bsp-form.js"
   ],
   "name": "bsp-form",
-  "version": "0.0.6"
+  "version": "0.0.7"
 }
